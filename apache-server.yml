@@ -1,0 +1,10 @@
+---
+- name: Configuring a webserver and hosting a webpage on it
+  hosts: apache
+  become: true
+  vars_files:
+    - ./apache-server/vars/user_auth.yml
+  tasks:
+    - name: CONFIGUTIRING A WEBSERVER
+      include_role:
+        name: apache-server

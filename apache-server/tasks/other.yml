@@ -1,0 +1,24 @@
+---   
+
+- name: conf selinux
+  selinux:
+    policy: targeted
+    state: permissive
+
+- name: restart services
+  service:
+    name: "{{ item }}"
+    state: restarted
+    enabled: true
+  loop: "{{ srvs}}"
+
+- name: conf firewall
+  firewalld:
+    service: "{{ item }}"
+    state: enabled
+    permanent: true
+    immediate: true
+  loop:
+    - http
+    - https
+
