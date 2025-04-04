@@ -4,6 +4,7 @@
     name: "{{ item }}"
     state: present
   loop: "{{ pkgs }}"
+  notify: restart httpd
 
 - name: Generating a ssl certificate
   include_tasks: ssl.yml  
@@ -13,6 +14,7 @@
   template:
     src: "{{ cert_org_name }}.conf.j2"
     dest: /etc/httpd/conf.d/{{ cert_org_name }}.conf
+  notify: restart httpd
 
 - name: "Ensuring the document root exists"
   file:
@@ -29,5 +31,16 @@
     src: index.html.j2
     dest: "{{ doc_root }}/index.html"
 
-- name: CONFIGURE SELINUX, SERVICES and FIREWALL  
-  include_tasks: other.yml
+- name: configuring selinux
+  selinux:
+    policy: targeted
+    state: permissive
+
+- name: restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+    enabled: true
+  notify: configuring firewalld
+
+

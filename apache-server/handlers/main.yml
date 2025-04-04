@@ -1,18 +1,11 @@
 ---   
-
-- name: conf selinux
-  selinux:
-    policy: targeted
-    state: permissive
-
-- name: restart services
+- name: restart httpd
   service:
-    name: "{{ item }}"
+    name: httpd
     state: restarted
     enabled: true
-  loop: "{{ server.srv }}"
 
-- name: conf firewall
+- name: configuring firewalld
   firewalld:
     service: "{{ item }}"
     state: enabled
