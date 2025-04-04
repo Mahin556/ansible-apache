@@ -3,7 +3,7 @@
   hosts: apache
   become: true
   vars_files:
-    - ./apache-server/vars/user_auth.yml
+    - user_auth.yml
   tasks:
     - name: CONFIGUTIRING A WEBSERVER
       include_role:
