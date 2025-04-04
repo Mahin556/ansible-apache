@@ -1,0 +1,20 @@
+---
+- name: "Installing a passlib module"
+  ansible.builtin.pip:
+    name:  passlib
+
+- name: Applying a authentication on the website
+  template:
+    src: htaccess.j2
+    dest: "{{ doc_root }}/.htaccess"
+
+- name: Add a user to a password file and ensure permissions are set
+  community.general.htpasswd:
+    path: /etc/httpd/conf/.htpasswd
+    name: "{{ item.name }}"
+    password: "{{  item.passwd }}"
+    owner: root
+    group: apache
+    mode: 0640
+    crypt_scheme: md5_crypt
+  loop: "{{ users }}"
