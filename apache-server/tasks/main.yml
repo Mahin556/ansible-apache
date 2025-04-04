@@ -1,4 +1,3 @@
-B
 ---
 - name: Installing a required packages
   yum:
