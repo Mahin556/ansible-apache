@@ -1,5 +1,5 @@
 ---
-- name: Installing a mod_ssp and python3-pip
+- name: Installing a mod_ssl and python3-pip
   yum: 
     name: "{{ item }}"
     state: present
