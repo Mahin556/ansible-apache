@@ -1,16 +1,10 @@
 ---
-pkgs:
-  - httpd
-  - mod_ssl
-  - python3-pip
-
 server_name: webfix.com
 server_alias: 
   - www.webfix.com 
   - demo.com
 server_admin: mahinraza123@gmail.com
-  
-doc_root: /var/www/html
+
 directory_indexes: 
   - index.html
   - index.php

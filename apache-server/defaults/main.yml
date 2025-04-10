@@ -1,2 +1,5 @@
 ---
-# defaults file for apache-server
+pkgs:
+  - httpd
+
+doc_root: /var/www/html
